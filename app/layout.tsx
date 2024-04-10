@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Linguify",
   description: "AI based Language Learning App",
+  icons:{
+  icon: './public/mascot.svg'
+  }
 };
 
 export default function RootLayout({
@@ -24,6 +27,9 @@ export default function RootLayout({
     }}
     >
     <html lang="en" suppressHydrationWarning>
+      <head>
+      <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="66f6210b-4429-4250-8fdd-6e63ebd647f8" async></script>
+      </head>
       <body className={inter.className}>
         {children}
       </body>
