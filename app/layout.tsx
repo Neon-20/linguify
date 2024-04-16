@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import {neobrutalism} from '@clerk/themes';
+import { Toaster, toast } from 'sonner'
+
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -31,6 +33,7 @@ export default function RootLayout({
       <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="66f6210b-4429-4250-8fdd-6e63ebd647f8" async></script>
       </head>
       <body className={inter.className}>
+      <Toaster richColors position="bottom-right" />
         {children}
       </body>
     </html>
