@@ -2,18 +2,26 @@ import FeedWrapper from "@/components/FeedWrapper";
 import StickyWrapper from "@/components/sticky-wrapper";
 import { Header } from "./_components/Header";
 import { UserProgress } from "@/components/UserProgress";
+import { getUserProgress } from "@/db/queries";
+import { redirect } from "next/navigation";
 
-const LearnPage = () => {
+const LearnPage = async() => {
+const userProgress = await getUserProgress();
+
+if(!userProgress || !userProgress.activeCourse){
+    redirect("/courses");
+}
+
     return ( 
         <div className="flex gap-[48px] px-2">
             <FeedWrapper>
-            <Header title="Spanish"/>
+            <Header title = {userProgress.activeCourse.title} />
             </FeedWrapper>
             <StickyWrapper>
                 <UserProgress
-                activeCourse={{title:"Spanish", imageSrc:"/es.svg"}}
-                hearts={5}
-                points={10}
+                activeCourse={userProgress.activeCourse}
+                hearts={userProgress.hearts}
+                points={userProgress.points}
                 hasActiveSubscription={false}
                 />
             </StickyWrapper>
