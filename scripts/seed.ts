@@ -20,8 +20,8 @@ const main = async() => {
     await db.insert(schema.courses).values([
         {
             id:1,
-            title:"Indian",
-            imageSrc:"/in.svg",
+            title:"Spanish",
+            imageSrc:"/es.svg",
         },
         {
             id:2,
@@ -30,8 +30,8 @@ const main = async() => {
         },
         {
             id:3,
-            title:"Spanish",
-            imageSrc:"/es.svg",
+            title:"Indian",
+            imageSrc:"/in.svg",
         },
         {
             id:4,
@@ -44,8 +44,8 @@ const main = async() => {
         {
             id:1,
             courseId:1,
-            title:"Indian",
-            description:"This is indian",
+            title:"Spanish",
+            description:"This is spanish",
             order:1,
         },
     ])
@@ -100,6 +100,7 @@ const main = async() => {
             correct:false,
         },
     ]);
+
     
 
     console.log("Seeding finished");    
