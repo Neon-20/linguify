@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { integer, pgEnum, pgTable,serial,text } from "drizzle-orm/pg-core";
+import { integer, pgEnum, pgTable,serial,text,boolean } from "drizzle-orm/pg-core";
 
 
 export const courses = pgTable("courses",{
@@ -81,5 +81,38 @@ export const challengesRelations = relations(challenges,({one,many})=>({
     lesson:one(lessons,{
         fields:[challenges.lessonId],
         references:[lessons.id]
+    }),
+    challengesOptions:many(challengesOptions),
+    challengesProgress:many(challengesProgress),
+}))
+
+export const challengesOptions = pgTable("challenges_options",{
+    id:serial("id").primaryKey(),
+    challengeId:integer("challenge_id").references(() => challenges.id,{onDelete:"cascade"}).notNull(),
+    text:text("text").notNull(),
+    correct:boolean("correct").notNull(),
+    imageSrc:text("image_src").notNull(),
+    audioSrc:text("audio_src").notNull(),
+})
+
+export const challengesOptionsRelations = relations(challengesOptions,({one})=>({
+    challenge:one(challenges,{
+        fields:[challengesOptions.challengeId],
+        references:[challenges.id]
+    })
+}))
+
+
+export const challengesProgress = pgTable("challenges_progress",{
+    id:serial("id").primaryKey(),
+    userId:text("user_id").notNull(),
+    challengeId:integer("challenge_id").references(() => challenges.id,{onDelete:"cascade"}).notNull(),
+    completed:boolean("completed").notNull().default(false),
+})
+
+export const challengesProgressRelations = relations(challengesProgress,({one})=>({
+    challenge:one(challenges,{
+        fields:[challengesProgress.challengeId],
+        references:[challenges.id]
     })
 }))
