@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import {neobrutalism} from '@clerk/themes';
 import { Toaster, toast } from 'sonner'
+import { Poppins } from "next/font/google"
 
 
 
-const inter = Inter({ subsets: ["latin"] });
+
+const font = Poppins({ subsets: ["latin"], weight: ["600"] })
 
 export const metadata: Metadata = {
   title: "Linguify",
@@ -32,7 +33,7 @@ export default function RootLayout({
       <head>
       <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="66f6210b-4429-4250-8fdd-6e63ebd647f8" async></script>
       </head>
-      <body className={inter.className}>
+      <body className={font.className}>
       <Toaster richColors position="bottom-right" />
         {children}
       </body>
