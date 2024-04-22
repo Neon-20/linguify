@@ -1,9 +1,12 @@
 import { lessons, units } from "@/db/schema"
+import { UnitBanner } from "./UnitBanner"
+import LessonButton from "./LessonButton"
 
 interface UnitProps{
     id:number
     title:string
     description:string
+    courseId:number //this can be removed if doesnt work
     order:number
     lessons:(typeof lessons.$inferSelect & {
         completed:boolean
@@ -15,6 +18,7 @@ interface UnitProps{
 }
 const Unit = ({
     id,
+    courseId,
     title,
     description,
     order,
@@ -24,7 +28,24 @@ const Unit = ({
 }:UnitProps) => {
     return ( 
         <div>
-            {}
+        <UnitBanner title = {title} description = {description} />
+        <div className="flex flex-col items-center relative">
+            {lessons.map((lesson,index)=>{
+                const isCurrent = lesson.id === activeLesson?.id;
+                const isLocked = !lesson.completed && !isCurrent;
+
+                return (
+                    <LessonButton key={lesson.id}
+                    id={lesson.id}
+                    index={index}
+                    totalCount={lessons.length-1}
+                    locked={isLocked}
+                    current={true || isCurrent}
+                    percentage={activeLessonPercentage}
+                    />
+                )
+            })}
+        </div>
         </div>
     );
 }

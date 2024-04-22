@@ -30,6 +30,7 @@ if(!units){
                     id={unit.id}
                     title={unit.title}
                     description={unit.description}
+                    courseId = {unit.courseId}
                     order={unit.order}
                     lessons={unit.lessons}
                     activeLesson={undefined}
