@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { SideBarItems } from "./sideBar-items";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
-import { Loader } from "lucide-react";
+import { ChevronFirst, Loader } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface SideBarProps{
     className?:string;
@@ -34,6 +35,11 @@ export const SideBar = ({
             tracking-wide cursor-pointer">
             Linguify
             </h1>
+            <Button variant="ghost" size="icon" asChild>
+            <Link href="/">
+            <ChevronFirst className="h-5 w-5"/>
+            </Link>
+            </Button>
             </div>
             </Link>
             <div className="flex flex-col flex-1 gap-y-4">
