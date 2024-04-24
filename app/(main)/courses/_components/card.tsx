@@ -24,7 +24,8 @@ export const CardPage = ({
         <div 
         onClick={() =>onClick(id)}
         className={cn
-        ("h-full border-b-8 border rounded-xl hover:bg-black/5 cursor-pointer active:border-b-2 flex flex-col items-center justify-between p-3 pb-6 min-h-[217px] min-w-[200px]",
+        (`h-full border-b-8 border rounded-xl hover:bg-black/5 cursor-pointer active:border-b-2 flex flex-col items-center justify-between p-3 pb-6 min-h-[217px] min-w-[200px]
+        dark:border-b-8 dark:border dark:hover:bg-black/5 dark:active:border-b-2`,
         disabled && "pointer-events-none opacity-50")
     }
         >

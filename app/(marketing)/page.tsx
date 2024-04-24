@@ -21,7 +21,9 @@ export default function Home() {
     </div>
     <div className="flex flex-col items-center gap-y-6">
     <h1 className="font-bold text-xl lg:text-3xl
-    text-neutral-600 max-w-[600px] text-center">
+    text-neutral-600 max-w-[600px] text-center
+    dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-tr from-slate-500 to-neutral-300/90
+    ">
       <LottieJson/>
     Master and refine in learning new languages through Linguify.
     </h1>

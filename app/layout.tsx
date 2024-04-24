@@ -4,9 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import {neobrutalism} from '@clerk/themes';
 import { Toaster, toast } from 'sonner'
 import { Poppins } from "next/font/google"
-
-
-
+import { ThemeProvider } from "@/components/theme-provider"
 
 const font = Poppins({ subsets: ["latin"], weight: ["600"] })
 
@@ -34,8 +32,15 @@ export default function RootLayout({
       <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="66f6210b-4429-4250-8fdd-6e63ebd647f8" async></script>
       </head>
       <body className={font.className}>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
       <Toaster richColors position="bottom-right" />
         {children}
+        </ThemeProvider>
       </body>
     </html>
     </ClerkProvider>

@@ -13,7 +13,7 @@ export const UnitBanner = ({
 }:UnitBannerProps) => {
     return(
         <div className="w-full rounded-xl bg-green-500 p-5 text-white
-        flex items-center justify-between">
+        flex items-center justify-between dark:text-slate-700">
         <div className="space-y-2.5">
             <h3 className="text-2xl font-bold tracking-wide">{title}</h3>
             <p className="text-lg">{description}</p>

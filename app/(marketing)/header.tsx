@@ -1,12 +1,3 @@
-// import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
-// import Image from "next/image";
-// import {Loader} from "lucide-react";
-// import { 
-//   SignedIn,
-//   SignedOut,
-//   SignInButton
-// } from "@clerk/nextjs";
-// import { Button } from "@/components/ui/button";
 
 import { ClerkLoaded, ClerkLoading } from "@clerk/nextjs";
 import Image from "next/image";
@@ -14,11 +5,13 @@ import {Loader} from "lucide-react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ModeToggle } from "@/components/mode-toggle";
 
 
 const HeaderPage = () => {
   return ( 
     <header className="h-16 w-full border-b-2 border-slate-100
+    dark:border-none
     px-4">
     <div className="h-full lg:max-w-screen-lg mx-auto items-center
     justify-between flex">
@@ -35,12 +28,17 @@ const HeaderPage = () => {
     </Link>
     </h1>
     </div>
+    <div className="inline-flex gap-x-4 mt-2">
+      <div className="mt-2">
     <ClerkLoading>
       <Loader className="h-5 w-5 text-muted-foreground animate-spin"/>
     </ClerkLoading>
+    </div>
     <ClerkLoaded>
       <SignedIn>
+        <div className="mt-1">
         <UserButton afterSignOutUrl="/"/>
+        </div>
       </SignedIn>
       <SignedOut>
         <SignInButton
@@ -54,6 +52,10 @@ const HeaderPage = () => {
         </SignInButton>
       </SignedOut>
     </ClerkLoaded>
+    <div className="hidden lg:flex">
+    <ModeToggle/>
+    </div>
+    </div>
     </div>
     </header>
   );

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const FooterPage = () => {
   return (
-    <footer className="hidden lg:block border-t-2 w-full h-16 border-slate-100 p-2">
+    <footer className="hidden lg:block border-t-2 dark:border-none w-full h-16 border-slate-100 p-2">
     <div className="max-w-screen-lg mx-auto items-center justify-evenly
     h-full flex">
     <Button variant="ghost" size="lg" className="w-full">
