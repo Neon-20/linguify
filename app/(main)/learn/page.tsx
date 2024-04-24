@@ -33,6 +33,7 @@ if(!units){
                     courseId = {unit.courseId}
                     order={unit.order}
                     lessons={unit.lessons}
+                    // todo: change the activeLesson logic
                     activeLesson={undefined}
                     activeLessonPercentage={0}
                     />

@@ -12,7 +12,7 @@ interface LessonButtonProps{
     index:number,
     locked?:boolean,
     current?:boolean,
-    percentage:number
+    percentage:number,
     totalCount:number
 }
 
@@ -27,6 +27,7 @@ const LessonButton = ({
 }:LessonButtonProps) => {
     const cycleLength = 8;
     const cycleIndex =  index % cycleLength;
+    // jab index = 1 or 2 % 8  
     // after every 8 it should repeat
     let indentationLevel;
     if(cycleIndex<=2){
@@ -50,7 +51,6 @@ const LessonButton = ({
     const isCompleted = !current && !locked;
     
     const Icon = isCompleted ? Check: isLast ? Crown : Star;
-    
     const href = isCompleted ? `/lesson/${id}`:"/lesson";
 
 
@@ -66,8 +66,10 @@ const LessonButton = ({
                 marginTop: isFirst && !isCompleted ? 60:24,
             }}
             >
+                {/* if current is active then */}
             {current ? (
-            <div className="h-[102px] w-[102px] relative">
+            <div className="h-[102px] w-[102px]">
+                {/* relative */}
                 <div className="absolute -top-6 left-2.5 px-3 py-2.5
                 border-2 font-bold uppercase text-green-500 bg-white rounded-xl
                 animate-bounce tracking-wide z-10">
@@ -88,8 +90,8 @@ const LessonButton = ({
                     },
                 }}
                 >
-                    <Button size="rounded" variant={locked ? "locked" : "secondary"}
-                    className="h-[70px] w-[70px] border-b-8"
+                    <Button size="rounded" variant={locked ? "locked" : "super"}
+                    className="h-[70px] w-[70px] border-b-8 cursor-pointer"
                     >
                     <Icon 
                     className={cn("h-10 w-10",
@@ -103,9 +105,18 @@ const LessonButton = ({
                 </CircularProgressbarWithChildren>
             </div>
             ):(
-            <div>
-                Something
-            </div>
+                <Button size="rounded" variant={locked ? "locked" : "super"}
+                className="h-[70px] w-[70px] border-b-8 cursor-pointer"
+                >
+                <Icon 
+                className={cn("h-10 w-10",
+                    locked 
+                    ? "fill-neutral-400 text-neutral-400" 
+                    : "fill-primary-foreground text-primary-foreground",
+                    isCompleted && "fill-none stroke-[4]"
+                )}
+                />
+                </Button>
            )}
             </div>
         </Link>
