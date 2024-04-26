@@ -24,7 +24,7 @@ export const SideBar = ({
 }:SideBarProps) => {
     return(
         <div className={cn("flex h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col",className)}>
-            <Link href="/learn">
+            <Link href="/">
             <div className="pt-8 pb-7 pl-4 flex items-center gap-x-3">
             <Image
             src="/mascot.svg"
@@ -35,11 +35,11 @@ export const SideBar = ({
             tracking-wide cursor-pointer">
             Linguify
             </h1>
-            <Button variant="ghost" size="icon" asChild>
+            {/* <Button variant="ghost" size="icon" asChild>
             <Link href="/">
             <ChevronFirst className="h-5 w-5"/>
             </Link>
-            </Button>
+            </Button> */}
             </div>
             </Link>
             <div className="flex flex-col flex-1 gap-y-4">
