@@ -18,11 +18,11 @@ export const UnitBanner = ({
             <h3 className="text-2xl font-bold tracking-wide">{title}</h3>
             <p className="text-lg">{description}</p>
         </div>
-        <Link href="/lessons">
+        <Link href="/lesson">
         <Button
         size="lg"
         variant="secondary"
-        className="border border-b-4 active:border-b-4 hidden xl:flex active:border-2"
+        className="border border-b-4 dark:border-b-4 dark:border-slate-700 active:border-b-4 hidden xl:flex active:border-2"
         >
             <NotebookText className="mr-4"/>
             Continue
