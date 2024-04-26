@@ -13,7 +13,7 @@ interface UnitProps{
     })[],
     activeLesson:(typeof lessons.$inferSelect & {
         unit:typeof units.$inferSelect
-    }) | undefined,
+    }) | undefined ,
     activeLessonPercentage:number
 }
 const Unit = ({
@@ -31,7 +31,7 @@ const Unit = ({
         <UnitBanner title = {title} description = {description} />
         <div className="flex flex-col items-center relative">
             {lessons.map((lesson,index)=>{
-                const isCurrent = true || lesson.id === activeLesson?.id;
+                const isCurrent = lesson.id === activeLesson?.id;
                 const isLocked = !lesson.completed && !isCurrent;
 
                 return (
