@@ -90,7 +90,7 @@ const LessonButton = ({
                     },
                 }}
                 >
-                    <Button size="rounded" variant={locked ? "locked" : "super"}
+                    <Button size="rounded" variant={locked ? "locked" : "secondary"}
                     className="h-[70px] w-[70px] border-b-8 cursor-pointer"
                     >
                     <Icon 
@@ -105,7 +105,7 @@ const LessonButton = ({
                 </CircularProgressbarWithChildren>
             </div>
             ):(
-                <Button size="rounded" variant={locked ? "locked" : "super"}
+                <Button size="rounded" variant={locked ? "locked" : "secondary"}
                 className="h-[70px] w-[70px] border-b-8 cursor-pointer"
                 >
                 <Icon 
