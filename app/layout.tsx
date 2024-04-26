@@ -5,8 +5,9 @@ import {neobrutalism} from '@clerk/themes';
 import { Toaster, toast } from 'sonner'
 import { Poppins } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import ExitModal from "@/components/modals/useExitModal";
 
-const font = Poppins({ subsets: ["latin"], weight: ["600"] })
+const font = Poppins({ subsets: ["latin"], weight: ["500"] })
 
 export const metadata: Metadata = {
   title: "Linguify",
@@ -34,11 +35,12 @@ export default function RootLayout({
       <body className={font.className}>
       <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
       <Toaster richColors position="bottom-right" />
+        <ExitModal/>
         {children}
         </ThemeProvider>
       </body>
