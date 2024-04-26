@@ -2,21 +2,25 @@ import FeedWrapper from "@/components/FeedWrapper";
 import StickyWrapper from "@/components/sticky-wrapper";
 import { Header } from "./_components/Header";
 import { UserProgress } from "@/components/UserProgress";
-import { getUnits, getUserProgress } from "@/db/queries";
+import { getCourseProgress, getLessonPercentage, getUnits, getUserProgress } from "@/db/queries";
 import { redirect } from "next/navigation";
-import { lessons } from '../../../db/schema';
+import { lessons,units as UnitSchema } from '../../../db/schema';
 import Unit from "./_components/Unit";
 
 const LearnPage = async() => {
 const userProgressData =  getUserProgress();
 const unitsData =  getUnits();
+const courseProgressData = getCourseProgress();
+const lessonPercentageData = getLessonPercentage();
 
-const [userProgress, units] = await Promise.all([userProgressData, unitsData]);
+const [userProgress, units,courseProgress,lessonPercentage] = 
+await Promise.all([userProgressData, unitsData,courseProgressData,lessonPercentageData]);
 
 if(!userProgress || !userProgress.activeCourse){
     redirect("/courses");
 }
-if(!units){
+
+if(!courseProgress){
     redirect("/courses");
 }
 
@@ -33,9 +37,10 @@ if(!units){
                     courseId = {unit.courseId}
                     order={unit.order}
                     lessons={unit.lessons}
-                    // todo: change the activeLesson logic
-                    activeLesson={undefined}
-                    activeLessonPercentage={0}
+                    activeLesson={courseProgress?.activeLesson as typeof lessons.$inferSelect & {
+                        unit:typeof UnitSchema.$inferSelect
+                    } | undefined}
+                    activeLessonPercentage={lessonPercentage}
                     />
                 </div>
             ))}
