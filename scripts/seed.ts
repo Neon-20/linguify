@@ -90,8 +90,9 @@ const main = async() => {
             type:"SELECT",
             order:1,
             question:'Which one of these is "the man"?'
-        },
+        },  
     ]);
+
     await db.insert(schema.challengesOptions).values([
         {
             id:1,
@@ -118,7 +119,7 @@ const main = async() => {
             correct:false,
         },
     ]);
-
+    
     
 
     console.log("Seeding finished");    
