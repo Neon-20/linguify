@@ -21,7 +21,7 @@ const Challenge = ({
 }:ChallengeProps) => {
     return(
         <div className=
-        {cn("grid-gap-2",
+        {cn("grid gap-2",
             type === "ASSIST" && "grid-cols-1",
             type === "SELECT" && "grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]"
         )}
@@ -35,6 +35,7 @@ const Challenge = ({
             audioSrc={option.audioSrc}
             shortcut = {`${index+1}`}
             text= {option.text}
+            // Todo: remove hardCoded true
             selected = {selectedOption === option.id}
             onClick={()=>onSelect(option.id)}
             disabled={disabled}
