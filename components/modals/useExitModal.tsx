@@ -42,11 +42,11 @@ const ExitModal = () => {
             </DialogHeader>
             <DialogFooter>
                 <div className="flex flex-col gap-y-3 w-full">
-                <Button variant="primary" size="lg" className="w-full"
+                <Button variant="primary" size="default" className="w-full"
                 onClick={close}>
                     Keep Learning
                 </Button>
-                <Button variant="dangerOutline" size="lg" className="w-full"
+                <Button variant="dangerOutline" size="default" className="w-full"
                 onClick={()=>{
                     close();
                     router.push("/learn")

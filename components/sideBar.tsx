@@ -35,11 +35,6 @@ export const SideBar = ({
             tracking-wide cursor-pointer">
             Linguify
             </h1>
-            {/* <Button variant="ghost" size="icon" asChild>
-            <Link href="/">
-            <ChevronFirst className="h-5 w-5"/>
-            </Link>
-            </Button> */}
             </div>
             </Link>
             <div className="flex flex-col flex-1 gap-y-4">

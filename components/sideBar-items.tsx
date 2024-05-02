@@ -27,12 +27,12 @@ const active = pathname === href;
         className="justify-start h-[52px]"
         asChild
         >
-            <Link href={href}>
+            <Link href={href} className="dark:text-slate-200">
             {label}
             <Image
             src={iconSrc}   
             alt="label"
-            className="ml-auto"
+            className="ml-auto "
             height={32}
             width={32}
             />
