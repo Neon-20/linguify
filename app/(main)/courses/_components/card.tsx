@@ -43,7 +43,7 @@ export const CardPage = ({
             width={93.33}
             className="object-cover rounded-lg drop-shadow-md border"
             />
-            <p className="text-neutral-700 text-center font-bold">
+            <p className="dark:text-slate-200 text-neutral-700 text-center font-bold">
                 {title}
             </p>
         </div>
