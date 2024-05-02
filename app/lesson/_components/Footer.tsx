@@ -7,14 +7,14 @@ interface FooterProps{
     disabled?:boolean;
     status: "correct" | "wrong" | "none" | "completed";
     onCheck:() => void
-    lessondId?:boolean
+    lessonId?:boolean
 }
 
 const Footer = ({
     disabled,
     status,
     onCheck,
-    lessondId
+    lessonId
 }:FooterProps) => {
     useKey("Enter",onCheck,{},[onCheck])
     const isMobile = useMedia("(max-width:1024px)");
@@ -41,6 +41,15 @@ const Footer = ({
                     Oops Wrong Answer, Please Retry!! 😟
                 </div>
             )}
+            {status === "completed" && (
+                <Button
+                variant="default"
+                size={isMobile ? "sm" : "lg"}
+                onClick={()=>window.location.href = `/lesson/${lessonId}`}
+                >
+                    Practice Again
+                </Button>   
+            )}
             <Button
             disabled={disabled}
             className="ml-auto"
@@ -53,9 +62,6 @@ const Footer = ({
                 {status === "wrong" && "Retry"}
                 {status === "completed" && "Continue"}
             </Button>
-        </div>
-        <div className="flex flex-col items-center justify-center">
-            Render me
         </div>
         </footer>
     );
