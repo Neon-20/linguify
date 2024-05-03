@@ -5,6 +5,7 @@ import { getUserProgress } from "@/db/queries";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import ItemsPage from "./_components/items";
+import ShopJson from "./_components/lottie";
 
 const ShopPage = async() => {
     const userProgressData = getUserProgress();
@@ -27,14 +28,9 @@ const ShopPage = async() => {
             <FeedWrapper
             >
                 <div className="w-full flex flex-col items-center">
-                <Image
-                src="/shop.svg"
-                alt="Shop"
-                height={100}
-                width={100}
-                />
+                <ShopJson/>
                 <h1 className="text-center font-bold text-neutral-800 dark:text-slate-200 text-2xl my-6">
-                    Shop
+                    Shop Here 🤩
                 </h1>
                 <p className="text-muted-foreground text-center text-lg mb-6">
                     Spend points on your cool stuff with fun.
