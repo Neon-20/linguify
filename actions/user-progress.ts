@@ -9,6 +9,8 @@ import { redirect } from "next/navigation";
 import { challengesProgress } from '../db/schema';
 import { and, eq } from "drizzle-orm";
 
+const POINTS_TO_REFILL = 5; 
+
 export const upsertUserProgress = async(courseId:number) => {
     //authentication
     try{
@@ -52,8 +54,6 @@ catch (error) {
     throw error; // Rethrow the error to be handled by the caller
 }
 }
-
-
 
 export const reduceHearts = async(challengeId:number) => {
     const{userId} = await auth();
@@ -101,4 +101,29 @@ export const reduceHearts = async(challengeId:number) => {
     revalidatePath("/leaderboard");
     revalidatePath("/learn");
     revalidatePath(`/lesson/${lessonId}`);
+}
+
+export const refillHearts = async () => {
+    const currentUserProgress = await getUserProgress();
+    if(!currentUserProgress){
+        throw new Error("User Progress not found")
+    }
+    if(currentUserProgress.hearts === 5){
+        throw new Error("Hearts Already Exists")
+    }
+    if(currentUserProgress.points<POINTS_TO_REFILL){
+        throw new Error("Not Enough Points to upgrade.")
+    }
+    // api route
+    await db.update(userProgress).set({
+        hearts:5,
+        points:currentUserProgress.points-POINTS_TO_REFILL
+    }).where(
+        eq(userProgress.userId,currentUserProgress.userId)
+    )
+    //revalidating the paths
+    revalidatePath("/shop");
+    revalidatePath("/learn");
+    revalidatePath("/quests");
+    revalidatePath("/leaderboard");
 }
