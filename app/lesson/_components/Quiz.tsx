@@ -12,10 +12,12 @@ import Footer from "./Footer";
 import { upsertChallengeProgress } from "@/actions/challenge-progress";
 import { toast } from "sonner";
 import { reduceHearts } from "@/actions/user-progress";
-import { useAudio } from "react-use";
+import { useAudio,useMount } from "react-use";
 import Image from "next/image";
 import ResultCard from "./result-card";
-
+import { useRouter } from "next/navigation";
+import { useHeartsModal } from "@/store/use-hearts";
+import { usePractiseModal } from "@/store/use-practice-modal";
 
 interface QuizProps{
     initialLessonId:number
@@ -36,15 +38,16 @@ const Quiz = ({
     userSubscription
 }:QuizProps) => {
     const [hearts,setHearts] = useState(initialHearts);
-    const [percentage,setPercentage] = useState(initialPercentage);
+    const [percentage,setPercentage] = useState(()=>{
+        return initialPercentage === 100 ? 0: initialPercentage
+    });
     const [challenges] = useState(initialLessonChallenges);
     const [status,setStatus] = useState<"correct" | "wrong" | "none">("none")
     const [selectedOption,setSelectedOption] = useState<number>()
     const [pending,startTransition] = useTransition();
-    const [correctAudio,_,correctControl] = useAudio({src:"/correct.wav"})
-    const [incorrectAudio,_i,incorrectControl] = useAudio({src:"/incorrect.wav"})
-    const [finishAudio,_f,finishControl] = useAudio({src:"/finish.wav"})
+    const [lessonId] = useState(initialLessonId)
 
+    const router = useRouter();
 
     //find current challenge
     const[activeIndex,setActiveIndex] = useState(()=>{
@@ -55,13 +58,27 @@ const Quiz = ({
     const currentChallenge = challenges[activeIndex];//current active challenge
     const options = currentChallenge?.challengesOptions ?? [];
 
+    const{open:OpenHeartsModal} = useHeartsModal();
+    const{open:OpenPractiseModal} = usePractiseModal();
+
+    useMount(()=>{
+        if(initialPercentage === 100){
+            OpenPractiseModal();
+        }
+    })
+
+    const onCheck = () => {
+    router.push(`/learn`)
+    }
 
     const onNext = () => {
         setActiveIndex((current)=>current+1);
     }
     const { width, height } = useWindowSize();
-    if(true || !currentChallenge){
-        finishControl.play();
+    const [correctAudio,_,correctControl] = useAudio({src:"/correct.wav"})
+    const [incorrectAudio,_i,incorrectControl] = useAudio({src:"/incorrect.wav"})
+    const [finishAudio] = useAudio({src:"/finish.mp3", autoPlay:true})
+    if(!currentChallenge){
         return(
         <>
         {finishAudio}
@@ -70,6 +87,7 @@ const Quiz = ({
         height={height}
         recycle={false}
         numberOfPieces={1000}
+        tweenDuration={10000}
         />
         <div className="flex flex-col gap-y-4 lg:gap-y-8
         items-center justify-center h-full max-w-lg mx-auto">
@@ -77,8 +95,8 @@ const Quiz = ({
             src="/finish.svg"
             alt="Finish"
             className="hidden lg:block"
-            height={100}
-            width={100}
+            height={120}
+            width={120}
             />
             <Image
             src="/finish.svg"
@@ -88,7 +106,7 @@ const Quiz = ({
             width={50}
             />
             <h1 className="text-xl text-center lg:text-3xl
-            font-bold text-neutral-700">
+            font-bold text-neutral-700 dark:text-slate-200">
                 Great Job! <br/>
                 You&apos;ve completed the lesson.
             </h1>
@@ -102,12 +120,12 @@ const Quiz = ({
             value={hearts}    
             />
             </div>
-            <Footer
-            disabled={pending}
-            status={status}
-            onCheck={()=> {}}
-            />
         </div>
+        <Footer
+            lessonId={lessonId}
+            status="completed"
+            onCheck={onCheck}
+        />
         </>
         )
 }
@@ -148,7 +166,7 @@ const Quiz = ({
             upsertChallengeProgress(currentChallenge.id)
             .then((res)=>{
             if(res?.error){
-            toast.error("No hearts found 💔")
+            OpenHeartsModal();
             return;
             }
             correctControl.play();
@@ -169,7 +187,7 @@ const Quiz = ({
         reduceHearts(currentChallenge.id)
         .then((res)=> {
             if(res?.error === "hearts"){
-                console.error("Missing hearts");
+                OpenHeartsModal();
                 return;
             }
             incorrectControl.play()
