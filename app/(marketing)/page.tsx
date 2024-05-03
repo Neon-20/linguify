@@ -5,6 +5,8 @@ import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ConnectJson from "./connect";
+import VapiAssistant from "@/components/VapiAssistant";
+
 
 export default function Home() {
   return (
@@ -20,6 +22,9 @@ export default function Home() {
     />
     </div>
     <div className="flex flex-col items-center gap-y-6">
+        <div className="items-center justify-center flex">
+        <VapiAssistant/>
+        </div>
     <h1 className="font-bold text-xl lg:text-3xl
     text-neutral-600 max-w-[600px] text-center
     dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-tr from-slate-500 to-neutral-300/90
