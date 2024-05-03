@@ -6,6 +6,8 @@ import { Toaster, toast } from 'sonner'
 import { Poppins } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import ExitModal from "@/components/modals/useExitModal";
+import HeartsModal from "@/components/modals/useHeartsModal";
+import PractiseModal from "@/components/modals/usePractiseModal";
 
 const font = Poppins({ subsets: ["latin"], weight: ["500"] })
 
@@ -35,12 +37,12 @@ export default function RootLayout({
       <body className={font.className}>
       <ThemeProvider
             attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
+            defaultTheme="system"
           >
       <Toaster richColors position="bottom-right" />
         <ExitModal/>
+        <HeartsModal/>
+        <PractiseModal/>
         {children}
         </ThemeProvider>
       </body>
