@@ -17,7 +17,7 @@ const ResultCard = ({
             variant === "hearts" && "bg-rose-400 border-rose-400"
         )}>
             <div className={cn(
-            `p-1.5 text-white rounded-t-xl font-bold text-center uppercase text-xs`,
+            `p-1.5 text-white rounded-t-xl font-bold text-lg tracking-wide text-center uppercase`,
             variant === "points" && "bg-orange-400",
             variant === "hearts" && "bg-rose-400"
             )}>
