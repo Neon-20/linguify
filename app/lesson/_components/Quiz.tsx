@@ -18,6 +18,7 @@ import ResultCard from "./result-card";
 import { useRouter } from "next/navigation";
 import { useHeartsModal } from "@/store/use-hearts";
 import { usePractiseModal } from "@/store/use-practice-modal";
+import CelebrateJson from "./lottie";
 
 interface QuizProps{
     initialLessonId:number
@@ -78,7 +79,9 @@ const Quiz = ({
     const [correctAudio,_,correctControl] = useAudio({src:"/correct.wav"})
     const [incorrectAudio,_i,incorrectControl] = useAudio({src:"/incorrect.wav"})
     const [finishAudio] = useAudio({src:"/finish.mp3", autoPlay:true})
-    if(!currentChallenge){
+    
+    // finish screen
+    if(true || !currentChallenge){
         return(
         <>
         {finishAudio}
@@ -91,20 +94,14 @@ const Quiz = ({
         />
         <div className="flex flex-col gap-y-4 lg:gap-y-8
         items-center justify-center h-full max-w-lg mx-auto">
-            <Image
-            src="/finish.svg"
-            alt="Finish"
-            className="hidden lg:block"
-            height={120}
-            width={120}
-            />
-            <Image
+            <CelebrateJson/>
+            {/* <Image
             src="/finish.svg"
             alt="Finish"
             className="block lg:hidden"
             height={50}
             width={50}
-            />
+            /> */}
             <h1 className="text-xl text-center lg:text-3xl
             font-bold text-neutral-700 dark:text-slate-200">
                 Great Job! <br/>

@@ -40,11 +40,11 @@ const ItemsPage = ({
                 width={60}
                 />
                 <div className="flex-1">
-                <p className="font-bold text-base text-neutral-700 lg:text-xl">
+                <p className="font-bold text-base text-neutral-700 lg:text-xl dark:text-slate-200">
                     Refill Hearts
                 </p>
                 </div>
-                <Button 
+                <Button
                 onClick={onClick}
                 disabled={pending || hearts===5 || points < POINTS_TO_REFILL}>
                     {hearts === 5 ?
