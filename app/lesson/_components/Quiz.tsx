@@ -81,7 +81,7 @@ const Quiz = ({
     const [finishAudio] = useAudio({src:"/finish.mp3", autoPlay:true})
     
     // finish screen
-    if(true || !currentChallenge){
+    if(!currentChallenge){
         return(
         <>
         {finishAudio}

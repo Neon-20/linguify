@@ -1,7 +1,7 @@
 import {cache} from "react";
 import db from "./drizzle";
 import { auth } from "@clerk/nextjs";
-import { courses, userProgress, units, challenges, lessons, challengesProgress, challengesRelations, challengeEnum } from './schema';
+import { courses, userProgress, units, challenges, lessons, challengesProgress, challengesRelations, challengeEnum, userSubscription } from './schema';
 import { eq } from "drizzle-orm";
 
 export const getCourses = cache(async() => {
@@ -135,7 +135,7 @@ export const getCourseProgress = cache(async()=>{
         }
     });
     // normalising the data
-    console.log("getCourseProgress is working");
+    // console.log("getCourseProgress is working");
     const findUncompletedLessons = unitsInActiveCourse.
     flatMap((unit)=>unit.lessons).find((lesson) => {
         //Todo: If something doesnt work, check the last if clause
@@ -168,5 +168,31 @@ export const getLessonPercentage = cache(async()=>{
     const percentage = Math.round((completedChallenges.length/lesson.challenges.length)*100);
     return percentage;
 })  
+
+
+const DAY_IN_MS = 86_400_000;
+export const getUserSubscriptions = cache(async () => {
+    const {userId} = await auth();
+    if(!userId){
+        return null;
+    }
+    const subscription = await db.query.userSubscription.findFirst({
+        where:eq(userSubscription.userId,userId)
+    })  
+    if(!subscription) return null;
+
+    const isActive = 
+    subscription.stripePriceId
+    && subscription.stripeCurrentPeriodEnd?.getTime()!
+    + DAY_IN_MS > Date.now()
+
+    return{
+        ...subscription,
+        isActive:!!isActive
+    }
+
+    // PURCHASING AND CANCELLING HANDLED
+})
+// cancelling the subscription tells stripe not to renew next month
 
 
