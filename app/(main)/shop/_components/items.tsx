@@ -88,10 +88,10 @@ const ItemsPage = ({
                 </p>
             </div>
             <Button
-            disabled={pending || hasActiveSubscription}
+            disabled={pending}
             onClick={onUpgrade}
             >
-                {hasActiveSubscription ? "🤩 Active" : "🚀 Upgrade" }
+                {hasActiveSubscription ? "Settings" : "🚀 Upgrade" }
             </Button>
             </div>
         </ul>
