@@ -35,7 +35,6 @@ const Challenge = ({
             audioSrc={option.audioSrc}
             shortcut = {`${index+1}`}
             text= {option.text}
-            // Todo: remove hardCoded true
             selected = {selectedOption === option.id}
             onClick={()=>onSelect(option.id)}
             disabled={disabled}

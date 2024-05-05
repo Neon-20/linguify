@@ -1,7 +1,7 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Progress } from "@/components/ui/progress";
 import { useExitModal } from "@/store/use-exit-modal";
-import { InfinityIcon, X } from "lucide-react";
+import { Infinity, InfinityIcon, X } from "lucide-react";
 import Image from "next/image";
 
 interface HeaderProps{
@@ -34,12 +34,13 @@ const Header = ({
         className="mr-2 cursor-pointer"
         />
     {hasActiveSubscription 
-        ? <InfinityIcon className="h-6 w-6 stroke-[3]"/> : hearts
+        ? <Infinity className="h-6 w-6 shrink-0 stroke-[3]"/> : hearts
     }
+    </div>
     <div className="ml-4">
     <ModeToggle/>
     </div>
-        </div>
+        
         </div>
     );
 }

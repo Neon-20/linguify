@@ -6,7 +6,7 @@ import { courses } from "@/db/schema"
 
 
 interface UserProgressProps{
-    activeCourse:typeof courses.$inferSelect, //TODO: replace with DB types soon
+    activeCourse:typeof courses.$inferSelect, 
     hearts:number,
     points:number,
     hasActiveSubscription:boolean
