@@ -1,6 +1,6 @@
 "use client"
 
-import { challenges } from "@/db/schema"
+import { challenges, userSubscription } from "@/db/schema"
 import { challengesOptions } from '../../../db/schema';
 import { useState,useTransition } from "react";
 import useWindowSize from 'react-use/lib/useWindowSize'
@@ -28,7 +28,9 @@ interface QuizProps{
     })[];
     initialHearts:number
     initialPercentage:number
-    userSubscription:any //Todo: replace with subscription db type
+    userSubscription:typeof userSubscription.$inferSelect & {
+        isActive:boolean
+    } | null;
 }
 
 const Quiz = ({
@@ -200,6 +202,8 @@ const Quiz = ({
         
 }
 
+    const isPro = !!userSubscription?.isActive
+
     return ( 
         <>
         {incorrectAudio}
@@ -207,7 +211,7 @@ const Quiz = ({
             <Header
             hearts={hearts}
             percentage={percentage}
-            hasActiveSubscription = {userSubscription}
+            hasActiveSubscription = {isPro}
             />
             <div className="flex-1">
                 <div className="h-full justify-center flex items-center">

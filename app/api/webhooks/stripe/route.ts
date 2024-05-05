@@ -7,6 +7,8 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 //catch the response on success and failure from stripe
+// Remember that stripe is sending the post request
+// nextjs server is acting as a receiver over here
 export async function POST(req:Request){
     const body = await req.text();
     const signature = headers().get("Stripe-Signature") as string;

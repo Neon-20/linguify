@@ -1,4 +1,4 @@
-import { getLesson, getUserProgress } from "@/db/queries";
+import { getLesson, getUserProgress, getUserSubscriptions } from "@/db/queries";
 import { redirect } from "next/navigation";
 import Quiz from "../_components/Quiz";
 
@@ -7,15 +7,15 @@ type Props = {
         lessonId:number
     }
 }
-
-
 const LessonIdPage = async({
     params,
 }:Props) => {
     const lessonData =  getLesson(params.lessonId);
     const userProgressData =  getUserProgress();
+    const userSubscriptionData = getUserSubscriptions();
 
-    const[lesson,userProgress] = await Promise.all([lessonData,userProgressData]);
+
+    const[lesson,userProgress,userSubscription] = await Promise.all([lessonData,userProgressData,userSubscriptionData]);
 
     
     if(!lesson || !userProgress) {
@@ -32,7 +32,7 @@ const LessonIdPage = async({
         initialLessonChallenges = {lesson.challenges}
         initialHearts = {userProgress.hearts}
         initialPercentage = {initialPercentage}
-        userSubscription= {null}
+        userSubscription= {userSubscription}
         />
     );
 }

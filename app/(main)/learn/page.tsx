@@ -2,7 +2,7 @@ import FeedWrapper from "@/components/FeedWrapper";
 import StickyWrapper from "@/components/sticky-wrapper";
 import { Header } from "./_components/Header";
 import { UserProgress } from "@/components/UserProgress";
-import { getCourseProgress, getLessonPercentage, getUnits, getUserProgress } from "@/db/queries";
+import { getCourseProgress, getLessonPercentage, getUnits, getUserProgress, getUserSubscriptions } from "@/db/queries";
 import { redirect } from "next/navigation";
 import { lessons,units as UnitSchema } from '../../../db/schema';
 import Unit from "./_components/Unit";
@@ -12,9 +12,13 @@ const userProgressData =  getUserProgress();
 const unitsData =  getUnits();
 const courseProgressData = getCourseProgress();
 const lessonPercentageData = getLessonPercentage();
+const userSubscriptionData = getUserSubscriptions();
 
-const [userProgress, units,courseProgress,lessonPercentage] = 
-await Promise.all([userProgressData, unitsData,courseProgressData,lessonPercentageData]);
+
+const [userProgress, units,courseProgress,lessonPercentage,userSubscription] = 
+await Promise.all([userProgressData, unitsData,courseProgressData,lessonPercentageData,userSubscriptionData]);
+
+const isPro = !!userSubscription?.isActive
 
 if(!userProgress || !userProgress.activeCourse){
     redirect("/courses");
@@ -50,7 +54,7 @@ if(!courseProgress){
                 activeCourse={userProgress.activeCourse}
                 hearts={userProgress.hearts}
                 points={userProgress.points}
-                hasActiveSubscription={false}
+                hasActiveSubscription={isPro}
                 />
             </StickyWrapper>
         </div>
