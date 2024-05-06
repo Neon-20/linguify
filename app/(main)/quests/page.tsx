@@ -7,6 +7,8 @@ import ShopJson from "./_components/lottie";
 import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
 import Link from "next/link";
+import PromoSection from "../learn/_components/promo";
+import { quests } from "@/constants";
 
 const QuestsPage = async() => {
     const userProgressData = getUserProgress();
@@ -20,24 +22,7 @@ const QuestsPage = async() => {
 
     const isPro = !!userSubscription?.isActive
 
-    const quests = [
-        {
-            title:"Earn 20 XP",
-            value:20
-        },
-        {
-            title:"Earn 50 XP",
-            value:50
-        },
-        {
-            title:"Earn 100 XP",
-            value:100
-        },
-        {
-            title:"Earn 1000 XP",
-            value:1000
-        }
-    ]
+
 
 
     return ( 
@@ -49,6 +34,10 @@ const QuestsPage = async() => {
             points={userProgress.points}
             hasActiveSubscription={isPro}
             />
+            {!isPro && (
+                <PromoSection
+                />
+            )}
             </StickyWrapper>
             <FeedWrapper
             >

@@ -6,6 +6,9 @@ import { getCourseProgress, getLessonPercentage, getUnits, getUserProgress, getU
 import { redirect } from "next/navigation";
 import { lessons,units as UnitSchema } from '../../../db/schema';
 import Unit from "./_components/Unit";
+import PromoSection from "./_components/promo";
+import QuestsSection from "../quests/_components/quests";
+import { quests } from "@/constants";
 
 const LearnPage = async() => {
 const userProgressData =  getUserProgress();
@@ -56,6 +59,11 @@ if(!courseProgress){
                 points={userProgress.points}
                 hasActiveSubscription={isPro}
                 />
+            {!isPro && (
+                <PromoSection
+                />
+            )}
+            <QuestsSection points={userProgress.points}/>
             </StickyWrapper>
         </div>
     );
