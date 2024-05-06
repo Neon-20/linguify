@@ -5,6 +5,8 @@ import { getUserProgress, getUserSubscriptions } from "@/db/queries";
 import { redirect } from "next/navigation";
 import ItemsPage from "./_components/items";
 import ShopJson from "./_components/lottie";
+import PromoSection from "../learn/_components/promo";
+import QuestsSection from "../quests/_components/quests";
 
 const ShopPage = async() => {
     const userProgressData = getUserProgress();
@@ -27,6 +29,11 @@ const ShopPage = async() => {
             points={userProgress.points}
             hasActiveSubscription={isPro}
             />
+            {!isPro && (
+                <PromoSection
+                />
+            )}
+            <QuestsSection points = {userProgress.points} />
             </StickyWrapper>
             <FeedWrapper
             >
