@@ -7,6 +7,8 @@ import ShopJson from "./_components/lottie";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { AnimatedTooltip } from "@/components/animated-tooltip";
+import PromoSection from "../learn/_components/promo";
+import QuestsSection from "../quests/_components/quests";
 
 const LeaderBoardPage = async() => {
     const userProgressData = getUserProgress();
@@ -31,6 +33,11 @@ const LeaderBoardPage = async() => {
             points={userProgress.points}
             hasActiveSubscription={isPro}
             />
+            {!isPro && (
+                <PromoSection
+                />
+            )}
+            <QuestsSection points = {userProgress.points} />
             </StickyWrapper>
             <FeedWrapper
             >
@@ -46,19 +53,19 @@ const LeaderBoardPage = async() => {
                 {topTenUsers.map((userProgress,index)=>(
                     <div key={userProgress.userId}
                     className="items-center justify-center px-4
-                    flex w-full p-2 hover:bg-gray-200/50 rounded-xl cursor-pointer"
+                    flex w-full p-2 hover:bg-gray-200/50 dark:hover:bg-accent rounded-xl cursor-pointer"
                     >
-                        <p className="font-bold text-slate-700 mr-4">{index+1}</p>
+                        <p className="font-bold text-slate-700 mr-4 dark:text-slate-200">{index+1}</p>
                         <Avatar className="border bg-slate-100 h-8 w-8 mr-6 cursor-pointer">
                             <AvatarImage
                             className="object-cover"
                             src={userProgress.userImageSrc}
                             />
                         </Avatar>
-                        <p className="font-bold text-neutral-800 flex-1">
+                        <p className="font-bold text-neutral-800 flex-1 dark:text-slate-200">
                         {userProgress.userName}
                         </p>
-                        <p className="text-muted-foreground">
+                        <p className="text-muted-foreground dark:text-slate-200">
                             {userProgress.points} XP
                         </p>
                     </div>
