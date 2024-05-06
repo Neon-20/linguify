@@ -20,7 +20,7 @@ export default function VapiAssistant() {
     setCallStatus("loading");
     vapi.stop();
   };
-
+//@ts-ignore
   useEffect(() => {
     vapi.on("call-start", () => setCallStatus("active"));
     vapi.on("call-end", () => setCallStatus('inactive'));
