@@ -32,8 +32,7 @@ export default function RootLayout({
     >
     <html lang="en" suppressHydrationWarning>
       <head>
-      <link rel="icon" type="image/svg+xml" href="/public/mascot.svg" />
-      <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="66f6210b-4429-4250-8fdd-6e63ebd647f8" async></script>
+      <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="8efceb49-2776-47f5-bb58-33fcc018acc9" async></script>
       </head>
       <body className={font.className}>
       <ThemeProvider
